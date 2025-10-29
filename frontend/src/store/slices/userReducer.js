@@ -6,11 +6,13 @@ import { toast } from "react-toastify";
 // Async thunks
 export const registerUserAsync = createAsyncThunk(
   "user/register",
-  async (formData, { rejectWithValue }) => {
+  async (formData, { rejectWithValue, dispatch }) => {
     try {
       const res = await axios.post("/auth/register", formData);
       const { token, user } = res.data;
       if (token) localStorage.setItem("token", token);
+      // Clear any cached expenses
+      dispatch({ type: 'expenses/clearExpenses' });
       toast.success("Registration successful");
       return user;
     } catch (err) {
@@ -22,12 +24,14 @@ export const registerUserAsync = createAsyncThunk(
 
 export const loginUserAsync = createAsyncThunk(
   "user/login",
-  async (formData, { rejectWithValue }) => {
+  async (formData, { rejectWithValue, dispatch }) => {
     try {
       const res = await axios.post("/auth/login", formData);
       const { token, user } = res.data;
       if (token) localStorage.setItem("token", token);
-       toast.success("Login successful");
+      // Clear previous user's expenses
+      dispatch({ type: 'expenses/clearExpenses' });
+      toast.success("Login successful");
       return user;
     } catch (err) {
         toast.error(err.response?.data?.message);
@@ -61,13 +65,15 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    logout(state) {
+    logout(state, action) {
       // clear token and reset state
       localStorage.removeItem("token");
       state.user = null;
       state.isLoggedIn = false;
       state.status = "idle";
       state.error = null;
+      // Clear expenses when logging out
+      action.dispatch?.({ type: 'expenses/clearExpenses' });
     },
     // optional sync setter (if you want to set user from somewhere else)
     setUser(state, action) {

@@ -5,7 +5,8 @@ import User from '../models/User.js';
 
 export const getAllExpenses = async (req, res) => {
     try {
-        const expenses = await Expense.find().sort({ date: -1 });
+        const userId = req.userId;
+        const expenses = await Expense.find({ userId }).sort({ date: -1 });
         res.json(expenses);
     } catch (error) {
         res.status(500).json({ error: error.message });
