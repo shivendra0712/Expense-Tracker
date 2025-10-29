@@ -7,7 +7,7 @@ export const fetchExpensesAsync = createAsyncThunk(
   "expenses/fetchAll",
   async (_, { rejectWithValue }) => {
     try {
-      console.log("fetching expenses");
+      // console.log("fetching expenses");
       const res = await axios.get("/expenses");
       return res.data; // expect array of expenses
     } catch (err) {
@@ -34,7 +34,7 @@ export const updateExpenseAsync = createAsyncThunk(
   "expenses/update",
   async ({ id, updates }, { rejectWithValue }) => {
     try {
-      console.log(id , updates)
+      // console.log(id , updates)
       const res = await axios.put(`/expenses/${id}`, updates);
       return res.data; // expect updated expense
     } catch (err) {
@@ -48,7 +48,7 @@ export const deleteExpenseAsync = createAsyncThunk(
   "expenses/delete",
   async (expenseId, { rejectWithValue }) => {
     try {
-       console.log(expenseId)
+      //  console.log(expenseId)
       await axios.delete(`/expenses/${expenseId}`);
       return expenseId;
     } catch (err) {
@@ -112,7 +112,7 @@ const expensesSlice = createSlice({
       })
       .addCase(updateExpenseAsync.fulfilled, (state, action) => {
         state.status = "succeeded";
-        const idx = state.items.findIndex(i => i.id === action.payload.id);
+        const idx = state.items.findIndex(i => i._id === action.payload._id);
         if (idx !== -1) state.items[idx] = action.payload;
       })
       .addCase(updateExpenseAsync.rejected, (state, action) => {
@@ -127,7 +127,7 @@ const expensesSlice = createSlice({
       })
       .addCase(deleteExpenseAsync.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.items = state.items.filter(i => i.id !== action.payload);
+        state.items = state.items.filter(i => i._id !== action.payload);
       })
       .addCase(deleteExpenseAsync.rejected, (state, action) => {
         state.status = "failed";
