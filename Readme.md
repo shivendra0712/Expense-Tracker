@@ -2,7 +2,7 @@
 
 A full-stack expense tracking application built with MongoDB, Express.js, React.js, and Node.js. Features user authentication, CRUD operations, and real-time expense management.
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 - Node.js (v14 or higher)
@@ -30,6 +30,7 @@ MONGODB_URI=mongodb+srv://shivendra:Shivendra123@patient-dashboard.9yngvv4.mongo
 JWT_SECRET=expense-tracker
 JWT_EXPIRES_IN=7d
 FRONTEND_URL=http://localhost:5173
+FRONTEND_URL=https://expense-tracker-pi-eight-11.vercel.app (deploy frontend url  on vercel)
 ```
 
 3. **Frontend Setup**
@@ -41,6 +42,7 @@ npm install
 Create `.env` file in Frontend directory:
 ```env
  VITE_BACKEND_URL=http://localhost:5000/api/
+VITE_BACKEND_URL=https://expense-tracker-gst1.onrender.com/api (deploy backend url on render)
 ```
 
 
@@ -65,7 +67,7 @@ npm run dev
 ```
 Frontend runs on: `http://localhost:5173`
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 Expense-Tracker/
@@ -88,9 +90,9 @@ Expense-Tracker/
     └── package.json
 ```
 
-## ✨ Features
+##  Features
 
-### Core Features ✅
+### Core Features 
 - **CRUD Operations**: Add, edit, delete, list expenses
 - **Expense Fields**: Title, amount, category, date
 - **Summary Display**: Total expenses and category-wise breakdown
@@ -100,13 +102,13 @@ Expense-Tracker/
 - **MongoDB Integration**: Local/Atlas connection
 - **Field Validation**: Required field validation
 
-### Bonus Features ✅
+### Bonus Features 
 - **JWT Authentication**: Login/signup with user-specific expenses
 - **Edit Functionality**: Update existing expenses
 - **Search & Filter**: Filter by category, date range, search by title
 - **User Management**: Each user has isolated expenses
 
-## 🔌 API Endpoints
+##  API Endpoints
 
 ### Authentication
 - `POST /api/auth/register` - User registration
@@ -119,7 +121,7 @@ Expense-Tracker/
 - `PUT /api/expenses/:id` - Update expense
 - `DELETE /api/expenses/:id` - Delete expense
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Frontend
 - **React.js** (Vite)
@@ -136,7 +138,7 @@ Expense-Tracker/
 - **bcryptjs** (Password hashing)
 - **CORS** (Cross-origin requests)
 
-## 📖 Usage
+##  Usage
 
 1. **Register/Login**: Create account or sign in
 2. **Add Expenses**: Click "Add Expense" button
@@ -145,7 +147,7 @@ Expense-Tracker/
 5. **Edit/Delete**: Use action buttons on expense items
 6. **User Isolation**: Each user sees only their expenses
 
-## 🔧 Development Notes
+##  Development Notes
 
 - User authentication required for all expense operations
 - Expenses are filtered by user ID on backend
